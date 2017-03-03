@@ -1,0 +1,99 @@
+{
+    "calculation": {
+        "noise": {
+            "darkcurrent": true, 
+            "crs": true, 
+            "rn_correlation": true, 
+            "ffnoise": true, 
+            "readnoise": true
+        }, 
+        "effects": {
+            "ipc": true, 
+            "saturation": true, 
+            "background": true
+        }
+    }, 
+    "configuration": {
+        "min_snr_threshold": 30.0, 
+        "scene_size": 4.2, 
+        "max_scene_size": 20.0, 
+        "instrument": {
+            "aperture": "nrm", 
+            "filter": "f480m", 
+            "disperser": null, 
+            "mode": "target_acq", 
+            "instrument": "niriss"
+        }, 
+        "dynamic_scene": true, 
+        "detector": {
+            "ngroup": 3, 
+            "nexp": 1, 
+            "subarray": "sub64", 
+            "nint": 1, 
+            "readmode": "nisrapid"
+        }, 
+        "max_saturated_pixels": 5
+    }, 
+    "scene": [
+        {
+            "position": {
+                "position_parameters": [
+                    "x_offset", 
+                    "y_offset", 
+                    "orientation"
+                ], 
+                "y_offset": 0.0, 
+                "x_offset": 0.0, 
+                "orientation": 0.0
+            }, 
+            "shape": {
+                "geometry": "point", 
+                "shape_parameters": []
+            }, 
+            "spectrum": {
+                "name": "generic source", 
+                "redshift": 0.0, 
+                "lines": [], 
+                "spectrum_parameters": [
+                    "redshift", 
+                    "normalization", 
+                    "extinction", 
+                    "sed"
+                ], 
+                "sed": {
+                    "z": 0.0, 
+                    "unit": "fnu", 
+                    "sed_type": "flat"
+                }, 
+                "extinction": {
+                    "bandpass": "v", 
+                    "law": "mw_rv_31", 
+                    "value": 0.0, 
+                    "unit": "mag"
+                }, 
+                "normalization": {
+                    "norm_waveunit": "micron", 
+                    "norm_fluxunit": "mjy", 
+                    "type": "at_lambda", 
+                    "norm_flux": 0.10000000000000001, 
+                    "norm_wave": 2.0
+                }
+            }
+        }
+    ], 
+    "background": "medium", 
+    "strategy": {
+        "aperture_size": 0.328, 
+        "background_subtraction": true, 
+        "target_type": "", 
+        "target_source": 1, 
+        "units": "arcsec", 
+        "display_string": "Target Acquisition Centroid", 
+        "method": "tacentroid", 
+        "target_xy": [
+            0.0, 
+            0.0
+        ], 
+        "axis": "x"
+    }
+}

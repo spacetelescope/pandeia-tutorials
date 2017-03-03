@@ -1,0 +1,138 @@
+{
+    "background": "medium",
+    "calculation": {
+        "effects": {
+            "background": true,
+            "ipc": true,
+            "saturation": true
+        },
+        "noise": {
+            "crs": true,
+            "darkcurrent": true,
+            "ffnoise": true,
+            "readnoise": true,
+            "rn_correlation": true
+        }
+    },
+    "configuration": {
+        "detector": {
+            "nexp": 1,
+            "ngroup": 10,
+            "nint": 1,
+            "readmode": "rapid",
+            "subarray": "sub640"
+        },
+        "dynamic_scene": false,
+        "instrument": {
+            "aperture": "mask210r",
+            "disperser": null,
+            "filter": "f182m",
+            "instrument": "nircam",
+            "mode": "coronagraphy"
+        }
+    },
+    "scene": [
+        {
+            "id": 1,
+            "position": {
+                "orientation": 0.0,
+                "x_offset": 0.0,
+                "y_offset": 0.0
+            },
+            "shape": {
+                "geometry": "point"
+            },
+            "spectrum": {
+                "extinction": {
+                    "bandpass": "v",
+                    "law": "mw_rv_31",
+                    "unit": "mag",
+                    "value": 0.0
+                },
+                "lines": [],
+                "name": "generic source",
+                "normalization": {
+                    "norm_flux": 0.1,
+                    "norm_fluxunit": "mjy",
+                    "norm_wave": 2.0,
+                    "norm_waveunit": "microns",
+                    "type": "at_lambda"
+                },
+                "redshift": 0.0,
+                "sed": {
+                    "sed_type": "flat",
+                    "unit": "fnu"
+                }
+            }
+        }
+    ],
+    "strategy": {
+        "annulus_shape": "circular",
+        "aperture_size": 0.08,
+        "background_subtraction": true,
+        "calc_type": "contrast",
+        "contrast_azimuth": 45.0,
+        "contrast_separation": 1.0,
+        "delta_opd": 0.0,
+        "method": "coronagraphy",
+        "ncontrast": 100,
+        "pointing_error": [
+            0.0,
+            0.0
+        ],
+        "psf_subtraction": "optimal",
+        "psf_subtraction_source": {
+            "id": 1,
+            "position": {
+                "orientation": 0.0,
+                "x_offset": 0.0,
+                "y_offset": 0.0
+            },
+            "shape": {
+                "geometry": "point"
+            },
+            "spectrum": {
+                "extinction": {
+                    "bandpass": "v",
+                    "law": "mw_rv_31",
+                    "unit": "mag",
+                    "value": 0.0
+                },
+                "lines": [],
+                "name": "generic source",
+                "normalization": {
+                    "norm_flux": 0.01,
+                    "norm_fluxunit": "mjy",
+                    "norm_wave": 2.0,
+                    "norm_waveunit": "microns",
+                    "type": "at_lambda"
+                },
+                "redshift": 0.0,
+                "sed": {
+                    "sed_type": "flat",
+                    "unit": "fnu"
+                }
+            }
+        },
+        "psf_subtraction_xy": [
+            100,
+            0.0
+        ],
+        "scene_rotation": 0.0,
+        "sky_annulus": [
+            0.1,
+            0.2
+        ],
+        "target_source": 1,
+        "target_type": "",
+        "target_xy": [
+            0.0,
+            0.0
+        ],
+        "units": "arcsec",
+        "unocculted_xy": [
+            1.0,
+            1.0
+        ]
+    }
+}

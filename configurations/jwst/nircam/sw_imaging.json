@@ -1,0 +1,88 @@
+{
+    "background": "medium",
+    "calculation": {
+        "effects": {
+            "background": true,
+            "ipc": true,
+            "saturation": true
+        },
+        "noise": {
+            "crs": true,
+            "darkcurrent": true,
+            "ffnoise": true,
+            "readnoise": true,
+            "rn_correlation": true
+        }
+    },
+    "configuration": {
+        "detector": {
+            "nexp": 1,
+            "ngroup": 10,
+            "nint": 1,
+            "readmode": "rapid",
+            "subarray": "full"
+        },
+        "dynamic_scene": true,
+        "instrument": {
+            "aperture": "sw",
+            "disperser": null,
+            "filter": "f070w",
+            "instrument": "nircam",
+            "mode": "sw_imaging"
+        },
+        "max_scene_size": 10.0,
+        "scene_size": 2.0
+    },
+    "scene": [
+        {
+            "id": 1,
+            "position": {
+                "orientation": 0.0,
+                "x_offset": 0.0,
+                "y_offset": 0.0
+            },
+            "shape": {
+                "geometry": "point"
+            },
+            "spectrum": {
+                "extinction": {
+                    "bandpass": "v",
+                    "law": "mw_rv_31",
+                    "unit": "mag",
+                    "value": 0.0
+                },
+                "lines": [],
+                "name": "generic source",
+                "normalization": {
+                    "norm_flux": 0.1,
+                    "norm_fluxunit": "mjy",
+                    "norm_wave": 2.0,
+                    "norm_waveunit": "microns",
+                    "type": "at_lambda"
+                },
+                "redshift": 0.0,
+                "sed": {
+                    "sed_type": "flat",
+                    "unit": "fnu"
+                }
+            }
+        }
+    ],
+    "strategy": {
+        "aperture_size": 0.08,
+        "background_subtraction": true,
+        "display_string": "Imaging Aperture Photometry",
+        "method": "imagingapphot",
+        "sky_annulus": [
+            0.24,
+            0.32
+        ],
+        "target_source": 1,
+        "target_type": "",
+        "target_xy": [
+            0.0,
+            0.0
+        ],
+        "units": "arcsec"
+    }
+}
