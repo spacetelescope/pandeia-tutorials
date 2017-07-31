@@ -243,8 +243,8 @@ scene: list (no default)
 
                     **input** - spectrum provided via input arrays
                         spectrum: list-like or numpy.ndarray
-                            The 0th index is taken to be wavelength in units of 'mJy'.
-                            The 1st index is taken to be the flux in units of 'microns'.
+                            The 0th index is taken to be wavelength in units of 'microns'.
+                            The 1st index is taken to be the flux in units of 'mJy'.
 
         lines: list (default [])
           List of line definitions. Each definition is a dict with keys:
