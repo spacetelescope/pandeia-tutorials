@@ -1,4 +1,4 @@
-Currently Supported Calculation Modes (03-2016)
+Currently Supported Calculation Modes (v1.1.1)
 ===============================================
 
 The following following JWST instrument/mode combinations are currently implemented, working,
@@ -10,6 +10,7 @@ and part of the nightly regression tests:
     - coronagraphy
     - lrsslit
     - lrsslitless
+    - target_acq
 
 * ``nircam:``
     - sw_imaging
@@ -17,19 +18,22 @@ and part of the nightly regression tests:
     - ssgrism
     - wfgrism
     - coronagraphy
+    - target_acq
 
 * ``nirspec:``
     - ifu
     - msa
     - fixed_slit
+    - target_acq
 
 * ``niriss:``
     - imaging
     - soss
     - ami
     - wfss
+    - target_acq
 
-The following HST instrument/mode combination is not yet fully implemented, but will be available
+The following HST instrument/mode combination is not yet fully implemented, but may be available
 for engine testing and validation:
 
 * ``wfc3:``
@@ -108,6 +112,16 @@ scene: list (no default)
                         I(r) = I(0)/e.
                     minor: float (default 0.1)
                         Semi-minor axis in arcseconds
+                    norm_method: string (default 'integ_infinity')
+                        Methods of surface brightness normalization to perform. Supported methods are:
+                        * integ_infinity: Normalize to the total intensity of the source, integrated to infinity
+                        * surf_center: Normalize to the surface brightness at the center of the source
+                        * surf_scale: Normalize to the surface brightness at the scale radius (for gaussian2d, 1-sigma;
+                            for sersic, the e-folding scale length; NOT AVAILABLE FOR FLAT SOURCES)
+                    surf_area_units: string (default 'arcsec^2')
+                        Specifies what area the flux to be renormalized in spectrum/normalization/norm_flux is over.
+                        * arcsec^2: the flux is per square arcsecond.
+                        * sr: the flux is per steradian.
 
                 "sersic" requires one additional parameter:
                     sersic_index: float (default 1.0)
@@ -243,8 +257,8 @@ scene: list (no default)
 
                     **input** - spectrum provided via input arrays
                         spectrum: list-like or numpy.ndarray
-                            The 0th index is taken to be wavelength in units of 'microns'.
-                            The 1st index is taken to be the flux in units of 'mJy'.
+                            The 0th index is taken to be wavelength in units of 'mJy'.
+                            The 1st index is taken to be the flux in units of 'microns'.
 
         lines: list (default [])
           List of line definitions. Each definition is a dict with keys:
@@ -349,6 +363,7 @@ configuration: dict
             * fixed_slit
             * ami
             * coronagraphy
+				* target_acq
 
         filter: string
            (e.g. f070w)
@@ -357,7 +372,7 @@ configuration: dict
            (e.g. g235h)
 
         aperture: string
-           (e.g. a200)
+           (e.g. a200s1)
 
         shutter_location: string (only valid for NIRSpec MSA mode)
             Identifier string for slitlet position to use for MSA calculation
@@ -365,6 +380,7 @@ configuration: dict
         slitlet_shape: list-like  (only valid for NIRSpec MSA mode)
             List of 2-element offsets describing set of shutters to be open. Offsets are from scene center
             in units of shutter spacing.
+				(e.g. slitlet_shape = [[0,-2],[0,0],[0,2]])
 
     detector: dict
       Exposure configuration parameters.
@@ -402,6 +418,8 @@ strategy: dict
             * ifunodoffscene
             * msafullapphot
             * soss
+            * taphot
+            * tacentroid
 
         Planned methods that are not yet implemented include:
             imagingoptphot, specoptphot, speclinephot
@@ -468,12 +486,28 @@ strategy: dict
             Change in system OPD
         scene_rotation: float
             Rotation angle to apply to scene
-        psf_subtraction_source: Source dict in engine API format
-            Definition of source to use for PSF subtraction
+        psf_subtraction_source: Complete source dict in engine API format (see above)
+            Definition of source to use for PSF subtraction. This must be set here rather than as a source in the scene. Position parameters must be specified, though they are ignored. Use psf_subtraction_xy to specify the location of the psf subtraction source.
         psf_subtraction_xy: two-element list-like (float, float)
             Offset to apply to psf_subtraction_source
         unocculted_xy: two-element list-like (float, float)
             Offset to apply to source to measure contrast between occulted and unocculted observation
+
+    The parameters required for **taphot** are:
+
+        target_xy: list-like of format (float, float)
+            X and Y center position of the aperture and sky annulus.
+        background_subtraction: boolean
+            Choose to use background subtraction or not
+
+    The parameters required for **tacentroid** are:
+
+        target_xy: list-like of format (float, float)
+            X and Y center position of the aperture and sky annulus.
+        background_subtraction: boolean
+            Choose to use background subtraction or not
+        axis: string
+            Direction the centroid is calculated, "x" or "y"
 
     The parameters required for the planned methods will be defined as the methods
     are implemented.
